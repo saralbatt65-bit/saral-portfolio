@@ -215,7 +215,7 @@ const Footer = () => {
   return (
     <footer className="footer container">
       <div className="social-links">
-        <a href="#" className="social-link"><GitBranch size={20} /></a>
+        <a href="https://github.com/repos?q=owner%3A%40me" className="social-link"><GitBranch size={20} /></a>
         <a href="#" className="social-link"><Globe size={20} /></a>
         <a href="#" className="social-link"><Mail size={20} /></a>
       </div>
