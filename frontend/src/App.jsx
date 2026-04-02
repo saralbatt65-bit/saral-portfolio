@@ -161,6 +161,13 @@ const Contact = () => {
             </div>
           </div>
           <div className="contact-item">
+            <div className="contact-icon"><Smartphone size={24} /></div>
+            <div className="contact-detail">
+              <h4>Phone</h4>
+              <p><a href="tel:+917041959596" style={{ color: 'inherit', textDecoration: 'none' }}>+91 7041959596</a></p>
+            </div>
+          </div>
+          <div className="contact-item">
             <div className="contact-icon"><Terminal size={24} /></div>
             <div className="contact-detail">
               <h4>Location</h4>
