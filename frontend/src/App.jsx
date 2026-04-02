@@ -157,7 +157,7 @@ const Contact = () => {
             <div className="contact-icon"><Mail size={24} /></div>
             <div className="contact-detail">
               <h4>Email</h4>
-              <p>saralbatt65@gmail.com</p>
+              <p><a href="mailto:saralbatt65@gmail.com" style={{ color: 'inherit', textDecoration: 'none' }}>saralbatt65@gmail.com</a></p>
             </div>
           </div>
           <div className="contact-item">
@@ -216,7 +216,7 @@ const Footer = () => {
     <footer className="footer container">
       <div className="social-links">
         <a href="https://github.com/repos?q=owner%3A%40me" className="social-link"><GitBranch size={20} /></a>
-        <a href="#" className="social-link"><Globe size={20} /></a>
+        <a href="" className="social-link"><Globe size={20} /></a>
         <a href="#" className="social-link"><Mail size={20} /></a>
       </div>
       <p style={{ color: 'var(--text-secondary)' }}>&copy; {new Date().getFullYear()} Advanced Portfolio. All rights reserved.</p>
