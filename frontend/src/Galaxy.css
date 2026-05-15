@@ -59,15 +59,24 @@
 @media (max-width: 900px) {
   .solar-system {
     right: 50%;
-    top: 50%;
+    top: 30%; /* Move up behind the hero image container */
     transform: translate(50%, -50%) rotateX(65deg) rotateZ(10deg) scale(1.1);
     opacity: 0.25;
   }
 }
 
+@media (max-width: 768px) {
+  .solar-system {
+    top: 25%; /* Specifically for standard mobile view */
+    transform: translate(50%, -50%) rotateX(65deg) rotateZ(10deg) scale(0.85);
+    opacity: 0.2; /* slightly faded so it doesn't disturb text readability */
+  }
+}
+
 @media (max-width: 500px) {
   .solar-system {
-    transform: translate(50%, -50%) rotateX(65deg) rotateZ(10deg) scale(0.8);
+    top: 22%; /* Align closely with where the profile pic usually sits on small screens */
+    transform: translate(50%, -50%) rotateX(65deg) rotateZ(10deg) scale(0.65);
   }
 }
 

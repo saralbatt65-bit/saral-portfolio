@@ -41,7 +41,7 @@ const Navigation = ({ currentPage, setCurrentPage }) => {
       <div className="container nav-container">
         <a href="#" onClick={(e) => { e.preventDefault(); navigate('home', '#home'); }} className="header-logo-link" style={{ textDecoration: 'none' }}>
           <div className="header-logo-anim">
-            <span className="header-logo-text">saral Portfolio.😎</span>
+            <span className="header-logo-text">Saral Portfolio.😎</span>
           </div>
         </a>
 
