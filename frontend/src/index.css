@@ -1,15 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;700&family=Caveat:wght@400;500;600;700&display=swap');
 
 :root {
-  --bg-color: #0d0e15;
-  --surface-color: rgba(255, 255, 255, 0.03);
-  --primary-color: #6366f1;
-  --secondary-color: #ec4899;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --gradient-1: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
-  --gradient-glow: linear-gradient(135deg, rgba(99, 102, 241, 0.4) 0%, rgba(236, 72, 153, 0.4) 100%);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  --bg-color: #000000;
+  --surface-color: rgba(255, 255, 255, 0.02);
+  --primary-color: #00e5ff;
+  --secondary-color: #b000ff;
+  --text-primary: #ffffff;
+  --text-secondary: #b3b9c5;
+  --gradient-1: linear-gradient(135deg, #00e5ff 0%, #0077ff 50%, #b000ff 100%);
+  --gradient-glow: linear-gradient(135deg, rgba(0, 229, 255, 0.2) 0%, rgba(176, 0, 255, 0.2) 100%);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 * {
@@ -28,19 +28,59 @@ body {
 }
 
 /* Background Effects */
-body::before {
+body::before,
+body::after {
   content: '';
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-              radial-gradient(circle at 85% 30%, rgba(236, 72, 153, 0.15) 0%, transparent 50%);
+  width: 60vw;
+  height: 60vh;
+  border-radius: 50%;
+  filter: blur(120px);
   z-index: -1;
+  animation: floatBg 20s infinite ease-in-out alternate;
+  opacity: 0.15;
+  pointer-events: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
+body::before {
+  top: -10%;
+  left: -10%;
+  background: var(--primary-color);
+  animation-delay: 0s;
+}
+
+body::after {
+  bottom: -10%;
+  right: -10%;
+  background: var(--secondary-color);
+  animation-delay: -10s;
+  animation-duration: 25s;
+}
+
+@keyframes floatBg {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(15%, 20%) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-10%, 15%) scale(0.9);
+  }
+
+  100% {
+    transform: translate(-15%, -10%) scale(1.05);
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Outfit', sans-serif;
   font-weight: 700;
 }
@@ -57,6 +97,84 @@ a {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.handwriting-text {
+  font-family: 'Caveat', cursive;
+  font-size: 10rem;
+  /* Further increased size */
+  color: #00e5ff;
+  /* A bright cyan color that fits the dark theme well */
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  /* Use a stroke dashoffset like animation for the typing to make it look like drawing */
+  animation: typing 4s ease-out infinite;
+  /* Slower and infinite */
+  border-right: 2px solid #b000ff;
+  /* Purple cursor */
+  max-width: fit-content;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+  /* Add a nice glow */
+}
+
+.handwriting-text.cursor-blink {
+  /* Added a delay or combined animation for repeat */
+  animation: typing 4s ease-out infinite, blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+    width: 0;
+  }
+
+  70% {
+    width: 100%;
+    opacity: 1;
+  }
+
+  90% {
+    width: 100%;
+    opacity: 1;
+  }
+
+  /* Hold it visible */
+  100% {
+    width: 0;
+    opacity: 0;
+  }
+
+  /* Reset quickly */
+}
+
+@keyframes blink-caret {
+
+  from,
+  to {
+    border-color: transparent
+  }
+
+  50% {
+    border-color: #b000ff;
+  }
+}
+
+/* Scramble Text Effect Styles */
+.scramble-container {
+  display: inline-block;
+  min-height: 1.2em;
+}
+
+.scramble-dud {
+  color: var(--text-secondary);
+  opacity: 0.7;
 }
 
 /* Layout Utilities */
@@ -206,9 +324,11 @@ a {
     text-align: center;
     border-bottom: var(--glass-border);
   }
+
   .nav-links.active {
     display: flex;
   }
+
   .hamburger {
     display: block;
   }
@@ -220,6 +340,7 @@ a {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -230,21 +351,33 @@ a {
   animation: fadeInUp 0.8s forwards;
   opacity: 0;
 }
-.delay-1 { animation-delay: 0.2s; }
-.delay-2 { animation-delay: 0.4s; }
-.delay-3 { animation-delay: 0.6s; }
+
+.delay-1 {
+  animation-delay: 0.2s;
+}
+
+.delay-2 {
+  animation-delay: 0.4s;
+}
+
+.delay-3 {
+  animation-delay: 0.6s;
+}
 
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--bg-color);
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--primary-color);
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--secondary-color);
 }

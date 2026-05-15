@@ -7,12 +7,47 @@
   align-items: center;
   position: relative;
   overflow: hidden;
+  padding-top: 8rem; /* Add padding to account for the fixed header */
+}
+
+.delay-1 {
+  animation-delay: 0.2s;
+}
+
+.delay-2 {
+  animation-delay: 0.4s;
+}
+
+.delay-3 {
+  animation-delay: 0.6s;
+}
+
+.delay-4 {
+  animation-delay: 0.8s;
 }
 
 .hero-content {
-  max-width: 800px;
   position: relative;
   z-index: 10;
+}
+
+.hero-flex-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-direction: row-reverse; /* Image on left */
+}
+
+.hero-text-content {
+  flex: 0 0 50%;
+}
+
+.hero-image-container {
+  flex: 0 0 45%;
+  display: flex;
+  justify-content: flex-start; /* Align left */
+  margin-top: -5rem;
 }
 
 .hero-subtitle {
@@ -40,6 +75,23 @@
 .hero-buttons {
   display: flex;
   gap: 1rem;
+}
+
+.hero-profile-img {
+  width: 100%;
+  max-width: 400px; /* Reduced size */
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 12px; /* Square shape with slightly rounded edges */
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+  transition: all 0.3s ease-in-out;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-profile-img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.6);
+  border-color: rgba(0, 229, 255, 0.5);
 }
 
 /* Skills Section */
@@ -158,22 +210,43 @@
 
 /* Contact Section */
 .contact-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
   margin-top: 3rem;
 }
 
 .contact-info {
   display: flex;
-  flex-direction: column;
+  flex-direction: row; /* Ensure it stays a row */
   gap: 2rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .contact-item {
   display: flex;
-  align-items: flex-start;
+  align-items: center; /* Center vertically with icon */
   gap: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1.5rem 2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  min-width: 250px;
+}
+
+.hover-animate:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--primary-color);
+  box-shadow: 0 10px 20px rgba(0, 229, 255, 0.1);
+}
+
+.hover-animate:hover .contact-icon {
+  background: var(--gradient-1);
+  color: white;
+  transform: scale(1.1);
 }
 
 .contact-icon {
@@ -186,6 +259,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: all 0.3s ease;
 }
 
 .contact-detail h4 {
@@ -273,11 +347,52 @@
   transform: translateY(-3px);
 }
 
+@media (max-width: 900px) {
+  .hero-flex-layout {
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 2rem;
+  }
+  
+  .hero-text-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-image-container {
+    flex: 1;
+    justify-content: center;
+    margin-top: 0;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 8vw, 3.5rem);
+  }
+
+  .hero-profile-img {
+    max-width: 350px;
+  }
+
+  .contact-info {
+    flex-direction: column;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+}
+
 @media (max-width: 768px) {
   .contact-container {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
   .hero-buttons {
     flex-direction: column;
+    width: 100%;
+  }
+  .hero-buttons .btn {
+    width: 100%;
   }
 }
