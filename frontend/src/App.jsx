@@ -38,7 +38,7 @@ const Navigation = ({ currentPage, setCurrentPage }) => {
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container nav-container">
-        <a href="#" onClick={(e) => { e.preventDefault(); navigate('home', '#home'); }} className="logo handwriting-text cursor-blink">
+        <a href="#" onClick={(e) => { e.preventDefault(); navigate('home', '#home'); }} className="header-logo-text">
           saral Portfolio.😎
         </a>
 
@@ -120,8 +120,8 @@ const Hero = ({ setCurrentPage }) => {
             </span>
           </h1>
           <p className="hero-text animate-fade-up delay-3">
-            I build scalable web applications with visually stunning interfaces. 
-            Beyond code, I have a strong background in Marketing and Stock Market analysis, 
+            I build scalable web applications with visually stunning interfaces.
+            Beyond code, I have a strong background in Marketing and Stock Market analysis,
             blending technical expertise with strategic business insights.
           </p>
           <div className="hero-buttons animate-fade-up delay-4">
@@ -182,24 +182,25 @@ const Portfolio = ({ projects }) => {
 
       <div className="projects-grid">
         {projects && projects.length > 0 ? projects.map(project => (
-          <div key={project._id} className="project-card glass" style={{ padding: '2rem' }}>
-            <div className="project-content" style={{ padding: 0 }}>
-              <h3 className="project-title">{project.title}</h3>
-              <p className="project-desc">{project.description}</p>
+          <div key={project._id} className="project-card neo-card">
+            <div className="project-header">
+              <span className="project-category">{project.category}</span>
+              <div className="project-actions">
+                <a href={project.liveLink} className="action-icon" target="_blank" rel="noopener noreferrer"><ExternalLink size={20} /></a>
+                <a href={project.githubLink} className="action-icon" target="_blank" rel="noopener noreferrer">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 9 18v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+                </a>
+              </div>
+            </div>
 
+            <h3 className="project-title">{project.title}</h3>
+            <p className="project-desc">{project.description}</p>
+
+            <div className="project-footer">
               <div className="project-tags">
                 {project.skills.map((skill, idx) => (
                   <span key={idx} className="project-tag">{skill}</span>
                 ))}
-              </div>
-
-              <div className="project-links">
-                <a href={project.githubLink} className="project-link">
-                  <GitBranch size={18} /> Code
-                </a>
-                <a href={project.liveLink} className="project-link">
-                  <ExternalLink size={18} /> Live Demo
-                </a>
               </div>
             </div>
           </div>
@@ -264,9 +265,17 @@ const Footer = () => {
             <Mail size={22} />
           </a>
         </div>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-          &copy; {new Date().getFullYear()} Saral. Goal Ai developer and ai agent.
-        </p>
+        <div className="neo-pill">
+          <div className="pill-logo" style={{ minWidth: '45px', display: 'flex', justifyContent: 'center' }}>
+            <div className="footer-logo-anim">
+              <span className="footer-logo-text">S.</span>
+            </div>
+          </div>
+          <div className="pill-divider"></div>
+          <div className="pill-text">
+            MADE WITH <span className="heart">❤️</span> BY <span className="author">SARAL</span>
+          </div>
+        </div>
       </div>
     </footer>
   );
@@ -293,26 +302,51 @@ function App() {
         _id: '1',
         title: 'Medical Stock Management',
         description: 'A full-stack medical stock management application to efficiently track inventory and supplies.',
+        category: 'FULL STACK',
         githubLink: 'https://github.com/saralbatt65-bit/medical_stock_management',
-        liveLink: '#',
         skills: ['React', 'Node.js', 'MongoDB', 'Redux', 'Tailwind']
       },
       {
         _id: '2',
         title: 'Calculator Application',
         description: 'A functional and robust calculator application built for Android devices.',
+        category: 'MOBILE UTILITY',
         githubLink: 'https://github.com/saralbatt65-bit/calculator-application',
-        liveLink: '#',
         skills: ['Java', 'XML']
       },
       {
         _id: '3',
-        title: 'Task Management App',
-        description: 'Kanban style task manager with drag and drop capabilities for enhanced productivity.',
-        githubLink: '#',
-        liveLink: '#',
-        skills: ['React', 'TypeScript', 'Node.js']
+        title: 'SB Complaint Management App',
+        description: 'Complaint Management App built with Java using a modern tech stack: Firebase (Firestore, Auth, Storage), Google AI (Gemini API) for Sahayak assistant, ViewBinding, and Material Components. with drag and drop capabilities for enhanced productivity.',
+        category: 'Mobile Application',
+        githubLink: 'https://github.com/saralbatt65-bit/SB-complaint-Management',
+        skills: ['java', 'XML', 'HTML']
+      },
+      {
+        _id: '4',
+        title: 'Portfolio Website',
+        description: 'A professional portfolio website for showcasing projects, skills, and contact information.',
+        category: 'Full Stack',
+        githubLink: 'https://github.com/saralbatt65-bit/saral-portfolio',
+        skills: ['HTML', 'CSS', 'React', 'Tailwind']
+      },
+      {
+        _id: '5',
+        title: 'Food Ordering',
+        description: 'A comprehensive Food Ordering & Restaurant Management Android System. Features 3 dedicated modules: User (Ordering & Billing), Chef (Kitchen Management), and Admin (Staff & Inventory Control). Built with Java and Material Design.',
+        category: 'Mobile Application',
+        githubLink: 'https://github.com/saralbatt65-bit/Food-application',
+        skills: ['java', 'XML']
+      },
+      {
+        _id: '6',
+        title: 'Vegist',
+        description: 'food shopping',
+        category: 'Full stack',
+        githubLink: 'https://github.com/saralbatt65-bit/vegist',
+        skills: ['HTML', 'CSS', 'javascript', 'MySql', 'php']
       }
+
     ]);
 
     return () => window.removeEventListener('scroll', handleScroll);

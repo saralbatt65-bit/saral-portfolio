@@ -124,6 +124,10 @@ a {
   animation: typing 4s ease-out infinite, blink-caret .75s step-end infinite;
 }
 
+.cursor-blink {
+  animation: blink-caret .75s step-end infinite;
+}
+
 @keyframes typing {
   0% {
     width: 0;
