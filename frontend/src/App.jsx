@@ -110,12 +110,12 @@ const Hero = ({ setCurrentPage }) => {
       <div className="container hero-content hero-flex-layout">
         <div className="hero-text-content">
           <span className="hero-subtitle animate-fade-up">Developer, Marketer & Trader</span>
-          <h2 className="hero-greeting animate-fade-up delay-1" style={{ fontSize: '2.5rem', fontWeight: 'bold', margin: '1rem 0 0.5rem 0', color: 'white' }}>
+          <h2 className="hero-greeting animate-fade-up delay-1" style={{ fontSize: '2rem', fontWeight: 'bold', margin: '1rem 0 0.5rem 0', color: 'white' }}>
             Hy, I'm <span className="gradient-text">Saral Batt</span> 👋
           </h2>
-          <h1 className="hero-title animate-fade-up delay-2" style={{ fontSize: '3.5rem' }}>
+          <h1 className="hero-title animate-fade-up delay-2" style={{ fontSize: '2.5rem' }}>
             Focused on <br />
-            <span className="gradient-text" style={{ display: 'inline-block', minHeight: '1.2em', fontSize: '3rem' }}>
+            <span className="gradient-text" style={{ display: 'inline-block', minHeight: '1.2em', fontSize: '2rem' }}>
               <TypingText phrases={specializedIn} />
             </span>
           </h1>
@@ -218,7 +218,7 @@ const Contact = () => {
       <p className="section-subtitle"></p>
 
       <div className="contact-container" style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-        <div className="contact-info" style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', gap: '2rem' }}>
+        <div className="contact-info" style={{ width: '100%', maxWidth: '500px', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
           <div className="contact-item hover-animate">
             <div className="contact-icon"><Mail size={24} /></div>
             <div className="contact-detail">
