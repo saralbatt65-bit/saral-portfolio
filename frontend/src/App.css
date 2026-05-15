@@ -1,8 +1,12 @@
 /* App specific styles */
 
-.header-logo-text {
+.header-logo-link {
+  text-decoration: none;
+}
+
+.header-logo-anim {
   font-family: 'Caveat', cursive;
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 700;
   color: #00e5ff;
   text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
@@ -10,9 +14,24 @@
   align-items: center;
   transition: all 0.3s ease;
   letter-spacing: 1px;
+  line-height: 1;
 }
 
-.header-logo-text::after {
+.header-logo-anim:hover {
+  text-shadow: 0 0 20px rgba(0, 229, 255, 0.8);
+  transform: scale(1.05);
+}
+
+.header-logo-text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing-header 4.5s ease-in-out infinite;
+  padding: 5px 2px 5px 5px; /* Prevent clipping */
+  vertical-align: middle;
+}
+
+.header-logo-anim::after {
   content: '';
   display: inline-block;
   width: 3px;
@@ -23,9 +42,10 @@
   animation: blink-caret 0.75s step-end infinite;
 }
 
-.header-logo-text:hover {
-  text-shadow: 0 0 20px rgba(0, 229, 255, 0.8);
-  transform: scale(1.05);
+@keyframes typing-header {
+  0%, 10% { max-width: 0; }
+  35%, 85% { max-width: 350px; } /* Set width large enough to reveal the text */
+  100% { max-width: 0; }
 }
 
 /* Hero Section */

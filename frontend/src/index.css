@@ -162,11 +162,11 @@ a {
 
   from,
   to {
-    border-color: transparent
+    opacity: 0;
   }
 
   50% {
-    border-color: #b000ff;
+    opacity: 1;
   }
 }
 

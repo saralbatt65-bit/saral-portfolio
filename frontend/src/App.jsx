@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import './App.css';
 import saralPhoto from './assets/saral-photo.jpeg';
+import GalaxyBackground from './GalaxyBackground';
 // ----------------------------------------------------
 // COMPONENTS
 // ----------------------------------------------------
@@ -38,8 +39,10 @@ const Navigation = ({ currentPage, setCurrentPage }) => {
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container nav-container">
-        <a href="#" onClick={(e) => { e.preventDefault(); navigate('home', '#home'); }} className="header-logo-text">
-          saral Portfolio.😎
+        <a href="#" onClick={(e) => { e.preventDefault(); navigate('home', '#home'); }} className="header-logo-link" style={{ textDecoration: 'none' }}>
+          <div className="header-logo-anim">
+            <span className="header-logo-text">saral Portfolio.😎</span>
+          </div>
         </a>
 
         <nav className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`}>
@@ -392,6 +395,7 @@ function App() {
 
   return (
     <>
+      <GalaxyBackground />
       <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
       {currentPage === 'home' ? (
         <>
