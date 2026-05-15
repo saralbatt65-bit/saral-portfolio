@@ -186,10 +186,14 @@ const Portfolio = ({ projects }) => {
             <div className="project-header">
               <span className="project-category">{project.category}</span>
               <div className="project-actions">
-                <a href={project.liveLink} className="action-icon" target="_blank" rel="noopener noreferrer"><ExternalLink size={20} /></a>
-                <a href={project.githubLink} className="action-icon" target="_blank" rel="noopener noreferrer">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 9 18v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
-                </a>
+                {project.liveLink && (
+                  <a href={project.liveLink} className="action-icon" target="_blank" rel="noopener noreferrer"><ExternalLink size={20} /></a>
+                )}
+                {project.githubLink && (
+                  <a href={project.githubLink} className="action-icon" target="_blank" rel="noopener noreferrer">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 9 18v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+                  </a>
+                )}
               </div>
             </div>
 
@@ -258,7 +262,7 @@ const Footer = () => {
           <a href="https://github.com/saralbatt65-bit" target="_blank" rel="noopener noreferrer" className="social-link" title="GitHub">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 9 18v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
           </a>
-          <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="social-link" title="LinkedIn">
+          <a href="https://www.linkedin.com/in/saral-batt-5470893a0/" target="_blank" rel="noopener noreferrer" className="social-link" title="LinkedIn">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
           </a>
           <a href="mailto:saralbatt65@gmail.com" className="social-link" title="Email">
@@ -297,14 +301,14 @@ function App() {
     window.addEventListener('scroll', handleScroll);
 
     // Static project data
-    setProjects([
+    const initialProjects = [
       {
         _id: '1',
         title: 'Medical Stock Management',
         description: 'A full-stack medical stock management application to efficiently track inventory and supplies.',
         category: 'FULL STACK',
         githubLink: 'https://github.com/saralbatt65-bit/medical_stock_management',
-        skills: ['React', 'Node.js', 'MongoDB', 'Redux', 'Tailwind']
+        skills: ['React', 'Node.js', 'MongoDB']
       },
       {
         _id: '2',
@@ -346,8 +350,42 @@ function App() {
         githubLink: 'https://github.com/saralbatt65-bit/vegist',
         skills: ['HTML', 'CSS', 'javascript', 'MySql', 'php']
       }
+    ];
 
-    ]);
+    setProjects(initialProjects);
+
+    // Automate fetching Live Links from GitHub 'About' section (homepage)
+    const fetchLiveLinks = async () => {
+      const updatedProjects = await Promise.all(initialProjects.map(async (project) => {
+        if (project.githubLink && project.githubLink.includes('github.com')) {
+          try {
+            const urlParts = project.githubLink.split('github.com/')[1].split('/');
+            const owner = urlParts[0];
+            const repo = urlParts[1];
+
+            if (owner && repo) {
+              const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
+              if (response.ok) {
+                const data = await response.json();
+                if (data.homepage && data.homepage.trim() !== '') {
+                  let liveUrl = data.homepage.trim();
+                  if (!liveUrl.startsWith('http')) {
+                    liveUrl = 'https://' + liveUrl;
+                  }
+                  return { ...project, liveLink: liveUrl };
+                }
+              }
+            }
+          } catch (err) {
+            console.error('Failed to fetch github data for', project.title, err);
+          }
+        }
+        return project;
+      }));
+      setProjects(updatedProjects);
+    };
+
+    fetchLiveLinks();
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);

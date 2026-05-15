@@ -266,14 +266,17 @@ a {
   width: 100%;
   z-index: 100;
   padding: 1.5rem 0;
-  transition: all 0.3s ease;
+  background: transparent;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1);
 }
 
 .header.scrolled {
-  background: rgba(13, 14, 21, 0.8);
-  backdrop-filter: blur(10px);
+  background: rgba(11, 15, 25, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   padding: 1rem 0;
-  border-bottom: var(--glass-border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
 .nav-container {
